@@ -19,6 +19,9 @@ Tinkercad provides a simulation environment where this circuit can be virtually 
 
 
 ## Circuit Diagram:
+
+<img width="599" height="359" alt="image" src="https://github.com/user-attachments/assets/9181bf57-1e50-4b80-ba69-37c3b3e11293" />
+
  
 ## Procedure: //Modify the procedure based on your circuit
 
@@ -53,14 +56,42 @@ Step 7: Save Your Work
 
 
 ## Code:
+```cpp
+#define ultraPin 7
+
+long duration;
+int distance;
+
+void setup() {
+  pinMode(ultraPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  pinMode(ultraPin, OUTPUT);
+  digitalWrite(ultraPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(ultraPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(ultraPin, LOW);
+
+  pinMode(ultraPin, INPUT);
+  duration = pulseIn(ultraPin, HIGH);
+
+  distance = duration * 0.034 / 2;
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+}
+```
 
 
 ## Output:
- 
+<img width="597" height="432" alt="image" src="https://github.com/user-attachments/assets/79c59126-f359-4d40-8e1c-b65ce2005cd0" />
+
+<img width="735" height="249" alt="image" src="https://github.com/user-attachments/assets/bf755829-6a07-43d2-9d9d-b8987e59c8a3" />
+
 
 
 ## Result
-
-
-Result:
-The simulation successfully measured the distance between the ultrasonic sensor  HC-SR04 and the object. The real-time distance values were accurately displayed on the serial monitor in centimeters.
+Motion was successfully detected using the PIR sensor. The Arduino activated the LED when motion occurred and turned it off when idle, confirming proper sensor operation and code execution.
